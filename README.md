@@ -1,2 +1,8 @@
-# DIR__Algorithm-Programmers
-This is a auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+# Impressive Problem & Solutions
+
+## in Programmers
+
+### LV 0 
+
+Q120866. 안전지대
+
