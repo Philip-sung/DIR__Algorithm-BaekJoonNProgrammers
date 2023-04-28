@@ -2,9 +2,9 @@
 
 ## 01 in Programmers
 ### 01.01 Introduction
-#### LV0
+#### * LV0
  Solved : 100
-#### LV1
+#### * LV1
  Solved : 55
 
 Last Update : 2023.04.28
