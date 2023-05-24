@@ -1,19 +1,34 @@
-#include <bits/stdc++.h>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+#include <map>
 
 using namespace std;
 
+bool compare(pair<int,int>& a, pair<int,int>& b) {
+    if (a.second == b.second) 
+        return a.first < b.first;
+    return a.second > b.second;
+}
+
 int solution(int k, vector<int> tangerine) {
-    int answer = 0;
-    int m = *max_element(tangerine.begin(), tangerine.end());
-    vector<int> v(m, 0);
-    for(auto& t : tangerine){
-        v[t - 1]++;
+    int answer = 0, sum = 0;
+    map<int, int> ma;
+
+    for(int i = 0; i < tangerine.size(); i++){
+        ma[tangerine[i]]++;
     }
-    stable_sort(v.rbegin(), v.rend());
-    for(int i = 0 ; i < v.size() ; i++){
+
+    vector<pair<int,int>> vec(ma.begin(), ma.end());
+    sort(vec.begin(), vec.end(), compare);
+
+    for(int i = 0; i < vec.size(); i++){
+        if(sum >= k)
+            break;
+        sum += vec[i].second;
         answer++;
-        k -= v[i];
-        if(k <= 0) return answer;
     }
+
     return answer;
 }
