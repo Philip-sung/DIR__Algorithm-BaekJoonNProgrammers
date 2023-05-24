@@ -1,21 +1,19 @@
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
+
 using namespace std;
-int solution(int k, vector<int> tangerine)
-{
-    int t[10000001]={};
-    int i, c=0, p=0;
-    for(i=0; i<tangerine.size(); ++i)
-        t[tangerine[i]]++;
-    vector<int> v;
-    for(i=1; i<=10000000; ++i)
-        if(t[i])
-            v.push_back(t[i]);
-    sort(v.rbegin(), v.rend());
-    while(k>0)
-    {
-        k-=v[p++];
-        c++;
+
+int solution(int k, vector<int> tangerine) {
+    int answer = 0;
+    int m = *max_element(tangerine.begin(), tangerine.end());
+    vector<int> v(m, 0);
+    for(auto& t : tangerine){
+        v[t - 1]++;
     }
-    return c;
+    stable_sort(v.rbegin(), v.rend());
+    for(int i = 0 ; i < v.size() ; i++){
+        answer++;
+        k -= v[i];
+        if(k <= 0) return answer;
+    }
+    return answer;
 }
