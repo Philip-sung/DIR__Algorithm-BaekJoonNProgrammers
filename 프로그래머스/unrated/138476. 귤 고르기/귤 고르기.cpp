@@ -1,29 +1,19 @@
 #include <bits/stdc++.h>
-//greedy
+
 using namespace std;
 
 int solution(int k, vector<int> tangerine) {
     int answer = 0;
-    vector<int> cnt;
-    sort(tangerine.begin(), tangerine.end());
-    int n = -1, tmp = 0;
-
-    for(auto t:tangerine){
-        if(n!=t){
-            cnt.push_back(tmp);
-            tmp = 0, n = t;
-        }
-        tmp++;
+    int m = *max_element(tangerine.begin(), tangerine.end());
+    vector<int> v(m, 0);
+    for(auto& t : tangerine){
+        v[t - 1]++;
     }
-    cnt.push_back(tmp);
-    sort(cnt.begin(), cnt.end());
-
-    for(auto c:cnt)cout<<c<<' ';cout<<'\n';
-    int idx = cnt.size() - 1;
-    while(k>0){
+    stable_sort(v.rbegin(), v.rend());
+    for(int i = 0 ; i < v.size() ; i++){
         answer++;
-        k-=cnt[idx--];
+        k -= v[i];
+        if(k <= 0) return answer;
     }
-
     return answer;
 }
