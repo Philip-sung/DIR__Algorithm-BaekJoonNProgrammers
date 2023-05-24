@@ -1,33 +1,28 @@
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <iostream>
-#include <map>
-
+#include <bits/stdc++.h>
+//greedy
 using namespace std;
 
-bool compare(pair<int,int>& a, pair<int,int>& b) {
-    if (a.second == b.second) 
-        return a.first < b.first;
-    return a.second > b.second;
-}
-
 int solution(int k, vector<int> tangerine) {
-    int answer = 0, sum = 0;
-    map<int, int> ma;
+    int answer = 0;
+    vector<int> cnt;
+    sort(tangerine.begin(), tangerine.end());
+    int n = -1, tmp = 0;
 
-    for(int i = 0; i < tangerine.size(); i++){
-        ma[tangerine[i]]++;
+    for(auto t:tangerine){
+        if(n!=t){
+            cnt.push_back(tmp);
+            tmp = 0, n = t;
+        }
+        tmp++;
     }
+    cnt.push_back(tmp);
+    sort(cnt.begin(), cnt.end());
 
-    vector<pair<int,int>> vec(ma.begin(), ma.end());
-    sort(vec.begin(), vec.end(), compare);
-
-    for(int i = 0; i < vec.size(); i++){
-        if(sum >= k)
-            break;
-        sum += vec[i].second;
+    for(auto c:cnt)cout<<c<<' ';cout<<'\n';
+    int idx = cnt.size() - 1;
+    while(k>0){
         answer++;
+        k-=cnt[idx--];
     }
 
     return answer;
